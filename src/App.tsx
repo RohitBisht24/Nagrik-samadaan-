@@ -36,7 +36,13 @@ const urlToPage: Record<string, PageType> = {
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageType>('dashboard');
-  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  // Default to collapsed on mobile screens (<576px)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth < 576;
+    }
+    return false;
+  });
   const [user] = useState({
     name: 'Priya Sharma',
     avatar: null,
@@ -61,6 +67,18 @@ export default function App() {
     return () => {
       window.removeEventListener('popstate', updatePageFromUrl);
     };
+  }, []);
+
+  // Handle window resize for mobile sidebar behavior
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 576) {
+        setSidebarCollapsed(true);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Function to navigate to different pages
@@ -110,8 +128,8 @@ export default function App() {
         />
         
         <main className={`flex-1 transition-all duration-300 ${
-          sidebarCollapsed ? 'ml-16' : 'ml-64'
-        } lg:${sidebarCollapsed ? 'ml-16' : 'ml-64'} ml-0 p-6`}>
+          sidebarCollapsed ? 'ml-0 sm-custom:ml-16' : 'ml-0 sm-custom:ml-64'
+        } p-3 sm-custom:p-4 lg:p-6`}>
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPage}
@@ -119,7 +137,7 @@ export default function App() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
-              className="w-full"
+              className="container-fluid"
             >
               {renderPage()}
             </motion.div>

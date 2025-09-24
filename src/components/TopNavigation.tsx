@@ -37,16 +37,16 @@ export function TopNavigation({ user }: TopNavigationProps) {
           <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg flex items-center justify-center">
             <Flag className="w-6 h-6 text-white" />
           </div>
-          <div>
-            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
+          <div className="hidden sm-custom:block">
+            <h1 className="text-base sm-custom:text-lg md:text-xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent">
               CitizenConnect
             </h1>
-            <p className="text-sm text-gray-500">Dashboard</p>
+            <p className="text-xs sm-custom:text-sm text-gray-500">Dashboard</p>
           </div>
         </motion.div>
 
         {/* Right Section */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm-custom:space-x-3 md:space-x-4">
           {/* Points Badge */}
           <motion.div
             whileHover={{ scale: 1.1 }}
