@@ -318,9 +318,9 @@ export function ReportIssue() {
                   </Button>
                 </motion.div>
                 
-                <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-                  <p className="text-sm text-blue-700">
-                    ✨ <strong>Reward Points:</strong> You'll earn 50 points for submitting this report!
+                <div className="mt-4 p-3 bg-blue-100 rounded-lg border">
+                  <p className="text-sm text-blue-800">
+                    {/* ✨ <strong>Reward Points:</strong> You'll earn 50 points for submitting this report! */}
                   </p>
                 </div>
               </CardContent>

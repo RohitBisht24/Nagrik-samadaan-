@@ -668,9 +668,9 @@ export function SOSPage() {
                       </Button>
                     </motion.div>
                     
-                    <div className="mt-4 p-3 bg-red-100 rounded-lg border border-red-200">
-                      <p className="text-sm text-red-800">
-                        🚨 <strong>Emergency Priority:</strong> This report will be immediately forwarded to relevant emergency services.
+                    <div className="mt-4 p-4 bg-red-100 rounded-lg border border-red-200">
+                      <p className="text-sm text-red-700">
+                        {/* 🚨 <strong>Emergency Priority:</strong> This report will be immediately forwarded to relevant emergency services. */}
                       </p>
                     </div>
                   </CardContent>

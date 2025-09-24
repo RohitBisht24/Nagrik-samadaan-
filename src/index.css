@@ -794,7 +794,7 @@
   }
 
   .mt-4 {
-    margin-top: calc(var(--spacing) * -14);
+    margin-top: calc(var(--spacing) * -10);
   }
 
   .mt-6 {
