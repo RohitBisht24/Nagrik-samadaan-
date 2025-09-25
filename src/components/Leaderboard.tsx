@@ -119,7 +119,7 @@ export function Leaderboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Main Leaderboard */}
         <div className="lg:col-span-2">
-          <Card>
+          <Card className="leaderboard-responsive">
             <CardHeader>
               <div className="flex items-center justify-between">
                 <CardTitle className="flex items-center space-x-2">
@@ -174,20 +174,20 @@ export function Leaderboard() {
                   </div>
 
                   {/* Full Rankings */}
-                  <div className="space-y-3">
+                  <div className="space-y-4 leaderboard-rankings-responsive">
                     {currentData.map((user, index) => (
                       <motion.div
                         key={user.id}
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className={`flex items-center space-x-4 p-4 rounded-lg border transition-all ${
+                        className={`flex items-center space-x-1 p-1 rounded-lg border transition-all leaderboard-card-row-responsive ${
                           user.isCurrentUser 
                             ? 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200 shadow-md' 
                             : 'hover:bg-gray-50'
                         }`}
                       >
-                        <div className="flex items-center justify-center w-10">
+                        <div className="flex items-center justify-center w-5">
                           {getRankIcon(user.rank)}
                         </div>
 
