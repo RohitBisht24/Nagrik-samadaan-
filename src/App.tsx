@@ -117,19 +117,23 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-      <TopNavigation user={user} />
-      
+
+      <TopNavigation
+        user={user}
+        sidebarCollapsed={sidebarCollapsed}
+        setSidebarCollapsed={setSidebarCollapsed}
+      />
+
       <div className="flex pt-16">
-        <Sidebar 
-          currentPage={currentPage} 
+        <Sidebar
+          currentPage={currentPage}
           setCurrentPage={navigateToPage}
           collapsed={sidebarCollapsed}
           setCollapsed={setSidebarCollapsed}
         />
-        
-        <main className={`flex-1 transition-all duration-300 ${
-          sidebarCollapsed ? 'ml-0 sm-custom:ml-16' : 'ml-0 sm-custom:ml-64'
-        } p-3 sm-custom:p-4 lg:p-6`}>
+
+        <main className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? 'ml-0 sm-custom:ml-16' : 'ml-0 sm-custom:ml-64'
+          } p-3 sm-custom:p-4 lg:p-6`}>
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPage}
@@ -144,7 +148,7 @@ export default function App() {
           </AnimatePresence>
         </main>
       </div>
-      
+
       <Toaster position="top-right" />
     </div>
   );

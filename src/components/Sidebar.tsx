@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
-import { 
-  Home, 
-  Plus, 
-  FileText, 
-  Trophy, 
-  Gift, 
-  AlertTriangle, 
+import {
+  Home,
+  Plus,
+  FileText,
+  Trophy,
+  Gift,
+  AlertTriangle,
   MessageSquare,
   Menu,
   X
@@ -32,15 +32,25 @@ const menuItems = [
 ];
 
 export function Sidebar({ currentPage, setCurrentPage, collapsed, setCollapsed }: SidebarProps) {
+  // Responsive: auto-collapse sidebar under 576px
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 576);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // Sidebar is open if not collapsed or on desktop
+  const showSidebar = !collapsed || !isMobile;
+
+  // Overlay for mobile when sidebar is open
   return (
     <>
-      {/* Mobile Overlay - Only show on screens <576px */}
-      {!collapsed && (
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/50 z-40 sm-custom:hidden"
+      {/* Overlay for mobile when sidebar is open */}
+      {isMobile && !collapsed && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 md:hidden"
           onClick={() => setCollapsed(true)}
         />
       )}
@@ -48,23 +58,26 @@ export function Sidebar({ currentPage, setCurrentPage, collapsed, setCollapsed }
       {/* Sidebar */}
       <motion.aside
         initial={{ x: -300 }}
-        animate={{ x: 0 }}
+        animate={{ x: showSidebar ? 0 : -300 }}
         className={cn(
           "fixed left-0 top-16 bottom-0 z-50 bg-white border-r border-blue-100 shadow-lg transition-all duration-300",
-          collapsed ? "w-12 sm-custom:w-16" : "w-48 sm-custom:w-64"
+          showSidebar ? (collapsed && !isMobile ? "w-12 sm-custom:w-16" : "w-48 sm-custom:w-64") : "w-0 overflow-hidden"
         )}
+        style={{ display: showSidebar ? 'block' : 'none' }}
       >
-        {/* Toggle Button */}
-        <div className="p-2 sm-custom:p-4 border-b border-blue-100">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setCollapsed(!collapsed)}
-            className="w-full justify-center"
-          >
-            {collapsed ? <Menu className="w-4 h-4 sm-custom:w-5 sm-custom:h-5" /> : <X className="w-4 h-4 sm-custom:w-5 sm-custom:h-5" />}
-          </Button>
-        </div>
+        {/* Toggle Button (desktop only) */}
+        {!isMobile && (
+          <div className="p-2 sm-custom:p-4 border-b border-blue-100">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setCollapsed(!collapsed)}
+              className="w-full justify-center"
+            >
+              {collapsed ? <Menu className="w-4 h-4 sm-custom:w-5 sm-custom:h-5" /> : <X className="w-4 h-4 sm-custom:w-5 sm-custom:h-5" />}
+            </Button>
+          </div>
+        )}
 
         {/* Navigation Menu */}
         <nav className="p-2 sm-custom:p-4 space-y-1 sm-custom:space-y-2">
@@ -83,7 +96,7 @@ export function Sidebar({ currentPage, setCurrentPage, collapsed, setCollapsed }
                   variant={isActive ? "default" : "ghost"}
                   className={cn(
                     "w-full justify-start relative overflow-hidden text-sm sm-custom:text-base",
-                    collapsed ? "px-1 sm-custom:px-2" : "px-2 sm-custom:px-4",
+                    (collapsed && !isMobile) ? "px-1 sm-custom:px-2" : "px-2 sm-custom:px-4",
                     isActive && "bg-gradient-to-r from-blue-500 to-blue-600 text-white shadow-lg",
                     isHighlight && !isActive && "bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 text-red-700 hover:from-red-100 hover:to-orange-100",
                     !isActive && !isHighlight && "hover:bg-blue-50"
@@ -109,11 +122,11 @@ export function Sidebar({ currentPage, setCurrentPage, collapsed, setCollapsed }
 
                   <Icon className={cn(
                     "w-4 h-4 sm-custom:w-5 sm-custom:h-5 mr-2 sm-custom:mr-3",
-                    collapsed && "mr-0",
+                    (collapsed && !isMobile) && "mr-0",
                     isActive ? "text-white" : item.color
                   )} />
-                  
-                  {!collapsed && (
+
+                  {(!collapsed || isMobile) && (
                     <motion.span
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
@@ -129,8 +142,8 @@ export function Sidebar({ currentPage, setCurrentPage, collapsed, setCollapsed }
         </nav>
 
         {/* Bottom Stats */}
-        {!collapsed && (
-          <motion.div 
+        {(!collapsed || isMobile) && (
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             className="absolute bottom-2 sm-custom:bottom-4 left-2 sm-custom:left-4 right-2 sm-custom:right-4 p-2 sm-custom:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100"
