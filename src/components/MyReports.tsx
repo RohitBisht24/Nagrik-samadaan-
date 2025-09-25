@@ -309,7 +309,7 @@ export function MyReports() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="border rounded-lg p-4 hover:shadow-md transition-all cursor-pointer"
+                        className="border rounded-lg p-4 hover:shadow-md transition-all cursor-pointer report-card-responsive"
                         onClick={() => setSelectedReport(report)}
                       >
                         <div className="flex items-start justify-between mb-3">
