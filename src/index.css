@@ -1,3 +1,22 @@
+/* Responsive fix for feedback button row on screens 341px–439px */
+@media (min-width: 341px) and (max-width: 439px) {
+  .feedback-btn-row-responsive {
+    flex-wrap: wrap !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    gap: 0.5rem !important;
+  }
+  .feedback-btn-row-responsive > * {
+    min-width: 0 !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+  .feedback-btn-row-responsive .text-blue-600 {
+    font-size: 0.95rem !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+}
   .report-card-responsive .badge {
     max-width: 100% !important;
     white-space: normal !important;

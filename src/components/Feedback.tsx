@@ -178,35 +178,35 @@ export function Feedback() {
                   </div>
 
                   {/* Quick Feedback Buttons */}
-                  <div className="flex items-center space-x-2">
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button
-                        size="sm"
-                        onClick={() => handleQuickFeedback(issue.id, true)}
-                        className="bg-green-600 hover:bg-green-700 text-white flex items-center space-x-2"
-                      >
-                        <ThumbsUp className="w-4 h-4" />
-                        <span>Satisfied</span>
-                      </Button>
-                    </motion.div>
-                    
-                    <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => handleQuickFeedback(issue.id, false)}
-                        className="border-orange-300 text-orange-700 hover:bg-orange-50 flex items-center space-x-2"
-                      >
-                        <ThumbsDown className="w-4 h-4" />
-                        <span>Not Satisfied</span>
-                      </Button>
-                    </motion.div>
-
+                  <div className="flex flex-col gap-2 feedback-btn-row-responsive">
+                    <div className="flex gap-6 justify-center feedback-btn-row-main">
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <Button
+                          size="sm"
+                          onClick={() => handleQuickFeedback(issue.id, true)}
+                          className="bg-green-600 hover:bg-green-700 text-white flex items-center space-x-2"
+                        >
+                          <ThumbsUp className="w-4 h-4" />
+                          <span>Satisfied</span>
+                        </Button>
+                      </motion.div>
+                      <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          onClick={() => handleQuickFeedback(issue.id, false)}
+                          className="border-orange-300 text-orange-700 hover:bg-orange-50 flex items-center space-x-2"
+                        >
+                          <ThumbsDown className="w-4 h-4" />
+                          <span>Not Satisfied</span>
+                        </Button>
+                      </motion.div>
+                    </div>
                     <Button
                       size="sm"
                       variant="ghost"
                       onClick={() => setSelectedIssue(issue)}
-                      className="text-blue-600 hover:bg-blue-50"
+                      className="text-blue-600 hover:bg-blue-50 feedback-btn-detailed"
                     >
                       <MessageSquare className="w-4 h-4 mr-1" />
                       Detailed Feedback
