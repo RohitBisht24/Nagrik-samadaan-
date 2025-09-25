@@ -37,7 +37,7 @@ export function StatsChart({ type }: StatsChartProps) {
             <Pie
               data={pieData}
               cx="50%"
-              cy="31%"
+              cy="36%"
               outerRadius={80}
               dataKey="value"
               animationBegin={0}
@@ -60,7 +60,7 @@ export function StatsChart({ type }: StatsChartProps) {
         </ResponsiveContainer>
         
         {/* Legend */}
-       <div className="grid grid-cols-3 gap-2 mt-4 justify-center ml-16 max-w-sm">
+  <div className="grid grid-cols-3 gap-1 mt-4 justify-center ml-14 max-w-sm legend-responsive">
           {pieData.map((item) => (
             <div key={item.name} className="flex items-center space-x-2">
               <div 
