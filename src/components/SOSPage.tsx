@@ -96,7 +96,7 @@ export function SOSPage() {
   React.useEffect(() => {
     // Simulate location fetch
     setTimeout(() => {
-      setLocation('MG Road, Bangalore, Karnataka 560001');
+      setLocation('Khandari, Agra, Uttar Pradesh 282002');
     }, 2000);
   }, []);
 
@@ -123,7 +123,7 @@ export function SOSPage() {
   const handleManualLocationFetch = () => {
     setManualLocation('Fetching location...');
     setTimeout(() => {
-      setManualLocation('MG Road, Bangalore, Karnataka 560001');
+  setManualLocation('Khandari, Agra, Uttar Pradesh 282002');
       toast.success('Location fetched successfully!');
     }, 2000);
   };

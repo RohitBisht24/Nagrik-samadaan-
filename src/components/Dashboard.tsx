@@ -72,7 +72,7 @@ export function Dashboard() {
         animate={{ opacity: 1, y: 0 }}
         className="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-6 text-white"
       >
-        <h1 className="text-3xl font-bold mb-2">Welcome back, Priya! 👋</h1>
+        <h1 className="text-3xl font-bold mb-2">Welcome back, Rohit! 👋</h1>
         <p className="text-blue-100">Let's make our city better together. You've reported 23 issues this month!</p>
       </motion.div>
 

@@ -101,7 +101,10 @@ export function Sidebar({ currentPage, setCurrentPage, collapsed, setCollapsed }
                     isHighlight && !isActive && "bg-gradient-to-r from-red-50 to-orange-50 border border-red-200 text-red-700 hover:from-red-100 hover:to-orange-100",
                     !isActive && !isHighlight && "hover:bg-blue-50"
                   )}
-                  onClick={() => setCurrentPage(item.id)}
+                  onClick={() => {
+                    setCurrentPage(item.id);
+                    if (isMobile) setCollapsed(true);
+                  }}
                 >
                   {/* Active indicator */}
                   {isActive && (
@@ -141,12 +144,12 @@ export function Sidebar({ currentPage, setCurrentPage, collapsed, setCollapsed }
           })}
         </nav>
 
-        {/* Bottom Stats */}
+        {/* Bottom Stats: Always at bottom for all screen sizes */}
         {(!collapsed || isMobile) && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="absolute bottom-2 sm-custom:bottom-4 left-2 sm-custom:left-4 right-2 sm-custom:right-4 p-2 sm-custom:p-4 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100"
+            className="absolute bottom-2 left-2 right-2 p-2 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg border border-blue-100 sm-custom:bottom-4 sm-custom:left-4 sm-custom:right-4 sm-custom:p-4"
           >
             <div className="text-center">
               <p className="text-xs sm-custom:text-sm text-blue-600 font-medium">Your Impact</p>

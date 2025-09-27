@@ -42,7 +42,7 @@ export function ReportIssue() {
   const handleLocationFetch = () => {
     setLocation('Fetching location...');
     setTimeout(() => {
-      setLocation('MG Road, Bangalore, Karnataka 560001');
+      setLocation('Khandari, Agra, Uttar Pradesh 282002');
       toast.success('Location fetched successfully!');
     }, 2000);
   };

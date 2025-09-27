@@ -11,6 +11,9 @@ import { SOSPage } from './components/SOSPage';
 import { Feedback } from './components/Feedback';
 import { Toaster } from './components/ui/sonner';
 
+// ...existing imports...
+import Lenis from '@studio-freight/lenis';
+
 type PageType = 'dashboard' | 'report-issue' | 'my-reports' | 'leaderboard' | 'rewards' | 'sos' | 'feedback';
 
 // URL mapping for pages
@@ -115,9 +118,30 @@ export default function App() {
     }
   };
 
+  // Global Lenis smooth scrolling
+  useEffect(() => {
+    let lenis: Lenis | undefined;
+    if (typeof window !== 'undefined') {
+      lenis = new Lenis({
+  lerp: window.innerWidth < 600 ? 0.32 : 0.25, // Nearly native, minimal smoothness
+        touchMultiplier: 2.5,
+        wheelMultiplier: 1.2,
+        infinite: false,
+      });
+
+      function raf(time: number) {
+        lenis?.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    }
+    return () => {
+      lenis?.destroy();
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-white">
-
       <TopNavigation
         user={user}
         sidebarCollapsed={sidebarCollapsed}
